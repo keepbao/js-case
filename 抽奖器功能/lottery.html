@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>抽奖器功能</title>
+  <style>
+    #fa{
+      width: 600px;
+      height: 600px;
+      border: 1px solid red;
+    }
+    #fa>div{
+      width: 33%;
+      height: 33%;
+      border: 1px solid red;
+      float: left;
+      line-height: 200px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    #start{
+      cursor: pointer;
+      background-color: pink;
+    }
+  </style>
+</head>
+<body>
+  <div id="fa">
+    <div class="option">曹卫东</div>
+    <div class="option">曹卫西</div>
+    <div class="option">曹卫南</div>
+    <div class="option">曹卫北</div>
+    <div id="start">开始选妃</div>
+    <div class="option">曹卫锅</div>
+    <div class="option">曹卫碗</div>
+    <div class="option">曹卫瓢</div>
+    <div class="option">曹卫盆</div>
+  </div>
+
+  <script>
+    // 逻辑：1.点击开始，触发定时器   2.定时器内部，随机一个数，通过这个数来获取奖品所在的元素
+    // 3.必须设置一个时间点,停止定时器
+
+    let but = document.getElementById('start');
+    let options = document.getElementsByClassName('option');
+    let timer = null;
+    but.onclick = function () { 
+      // 设置一个初始值 作为时间判断
+      let num = 0;
+      // 1.触发一个定时器
+      if(timer == null){
+        timer = setInterval(()=>{
+          num++;
+
+          // 2.随机 0-7的数,通过数组下标获得具体选中的元素
+          let ran = Math.round(Math.random()*(7-0)+0);
+          // console.log(ran);
+          // 3.1把所有的元素都恢复原来样式
+          for(let i=0;i<options.length;i++){
+            options[i].style.backgroundColor = '#fff';
+          }
+          // 3.2给选中元素,添加样式(背景颜色)
+          options[ran].style.backgroundColor = 'orange';
+
+          // 4.给定时器设置有效时间,停止定时器
+          //50 代表的是业务要求   共计5秒
+          if(num>=50){    
+            clearInterval(timer);
+            timer = null;
+          }
+
+      },100)
+      }
+     }
+  </script>
+</body>
+</html>

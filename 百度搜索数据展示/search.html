@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度搜索数据展示</title>
+</head>
+<body>
+    <div class="content">
+        <div class="search-box">
+            <input type="text" id="val" placeholder="请输入课程">
+            <input type="submit">
+        </div>
+        <div class="show" id="show"></div>
+    </div>
+    <script>
+        let arr = ['曹卫东  111','曹卫西    222','曹卫南    333','曹卫北    444','曹卫中    555']
+        
+        //逻辑：1、先完成   展示区域的显示或隐藏
+        // 2、input.value 和 arr 的每一项匹配
+        // indexOf()    匹配到返回数组下标，匹配不到返回-1
+        let input = document.getElementById('val');
+        let show = document.getElementById('show');
+        input.onkeyup = function(){
+            show.style.display = 'block';
+            let str = '';
+            arr.forEach((item) => {
+                let res = item.indexOf(input.value);
+                if(res !=-1){
+                    str += '<p>'+item+'</p>';
+                }
+            })
+            // 如果input.value为空或者str为false给用户一个提示
+            if(!input.value || !str){
+                show.innerHTML = '<p>暂无结果</p>'
+            }else{
+                show.innerHTML = str;
+            }
+        }
+        input.onblur = function(){
+            show.style.display = 'none';
+            input.value = '';
+        }
+
+    </script>
+</body>
+</html>

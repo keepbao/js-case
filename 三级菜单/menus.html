@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+  </style>
+  <title>三级菜单</title>
+</head>
+<body>
+  <ul id="ul1">
+   
+  </ul>
+</body>
+
+<script>
+  // 1.先获取数据
+  let xml = new XMLHttpRequest();
+  xml.open('get','./nav.json',true);
+  xml.send();
+  xml.onreadystatechange = function(){
+    // console.log(xml.status); //服务器状态
+    // console.log(xml.readyState); //ajax请求状态
+    if(xml.status==200 && xml.readyState==4){
+      let datas = JSON.parse(xml.responseText).data; //json格式的字符串
+      // console.log(datas);
+      let li1 = '';
+      datas.forEach((fir)=>{
+        // console.log(fir);
+        let li2 = '';
+        fir.content.forEach((sec)=>{
+          // console.log(sec);
+          let li3 = '';
+          sec.content.forEach((thi)=>{
+            console.log(thi);
+            li3 += '<li class="li3">'+
+                      '<a href="##">'+thi+'</a>'+
+                    '</li>';
+          });
+          li2 = '<li class="li2">'+
+                    '<a href="##">'+sec.title+'</a>'+
+                  '<ul class="ul3">'+
+                      li3+
+                  '</ul>'+
+                '</li>';
+        });
+        li1 += '<li class="li1">'+
+                '<a href="##">'+fir.title+'</a>'+
+                '<ul class="ul2">'+
+                    li2+
+                  '</ul>'+
+                '</li>';
+      });
+
+      // 把所有拼接好的元素   作为id为ul1的html进行赋值
+      document.getElementById('ul1').innerHTML = li1;
+      // 3.显示和隐藏功能
+      // 鼠标移入 li1的时候，让ul2显示  反之  隐藏
+      // 鼠标移入 ul2的时候，让ul3显示  反之  隐藏
+      let one = document.getElementsByClassName('li1');
+      let ul2 = document.getElementsByClassName('ul2');
+
+      let two = document.getElementsByClassName('li2');
+      let ul3 = document.getElementsByClassName('ul3');
+      // 二级菜单显示隐藏
+      showAndHide(one,ul2);
+      // 三级菜单显示隐藏
+      showAndHide(two,ul3)
+      // for(let i=0;i<one.length;i++){
+      //   // 先给li1下标赋值
+      //   one[i].index = i;
+      //   one[i].onmouseover = function(){
+      //     // 让ul2显示
+      //     // 利用ul2和li1 是对应的
+      //     ul2[this.index].style.display = 'block';
+      //   }
+      //   one[i].onmouseout = function(){
+      //     ul2[this.index].style.display = 'none';
+      //   }
+      // }
+
+    }
+  }
+
+  function showAndHide(lis,uls){
+      for(let i=0;i<lis.length;i++){
+        // 先给li1下标赋值
+        lis[i].index = i;
+        lis[i].onmouseover = function(){
+          // 让ul2显示
+          // 利用ul2和li1 是对应的
+          uls[this.index].style.display = 'block';
+        }
+        lis[i].onmouseout = function(){
+          uls[this.index].style.display = 'none';
+        }
+      }
+  }
+</script>
+
+</html>

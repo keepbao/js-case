@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab选项卡</title>
+</head>
+<body>
+    <ul>
+        <li>曹卫东</li>
+        <li>曹卫西</li>
+        <li>曹卫南</li>
+        <li>曹卫北</li>
+        <li>曹卫中</li>
+    </ul>
+    <script>
+        let li = document.getElementsByTagName('li');
+        let img = document.getElementsByTagName('img')
+
+        for(let i=0;i<li.length;i++){
+            //先进行元素数组下标的设置
+            li[i].index = i;
+            li[i].onmouseover = function(){
+                this.style.backgroundColor = 'yellow';
+                // 先把所有的图片隐藏，再让对应的图片出现
+                for(let j=0;j<img.length;j++){
+                    img[j].style.display = 'none';
+                }
+                img[this.index].style.display = 'block';
+            }
+
+            li[i].onmouseout = function(){
+                li[i].style.backgroundColor = '#eee';
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>进度条功能</title>
+  <style>
+    .fa {
+      width: 400px;
+      margin-bottom: 30px;
+      border: 1px solid aqua;
+    }
+    .son {
+      width: 0px;
+      height: 40px;
+      background-color: yellow;
+      text-align: center;
+      line-height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="fa">
+    <div class="son">
+      <span>0</span><span>%</span>
+    </div>
+  </div>
+  <button id="but">曹卫锅窜稀进度</button>
+
+  <script>
+    //逻辑：1、利用定时器来进行递增操作（width，百分数）
+    // 2、当变量达到400px，停止定时器
+    let but = document.getElementById('but');
+    let div = document.getElementsByTagName('div')
+    let span = document.getElementsByTagName('span')
+    let timer = null;
+    but.onclick = () => {
+      let num = 0;
+      if(timer == null){
+        timer = setInterval(()=>{
+        num += 1;
+        //给宽递增
+        div[1].style.width = num+'px';
+        // 给百分比递增
+        span[0].innerText = Math.ceil(num/4);
+        if(num==400){
+          clearInterval(timer);
+        }
+      },20)
+      }
+    }
+  </script>
+</body>
+</html>

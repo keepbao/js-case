@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>相册选择功能</title>
+  <style>
+    .big {
+      width: 400px;
+      height: 400px;
+    }
+    .small>img{
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <img src="./img/1.jfif" alt="" class="big">
+  </div>
+  <div class="small">
+    <img src="./img/2.jfif" alt="">
+    <img src="./img/3.jfif" alt="">
+    <img src="./img/4.jfif" alt="">
+    <img src="./img/5.jfif" alt="">
+  </div>
+
+  <script>
+    // 逻辑：本质上，把小图的src赋值给大图的src
+    // 图片元素.src = ''
+    let imgs = document.getElementsByTagName('img');
+    
+    for(let i=1;i<imgs.length;i++){
+      imgs[i].onmouseover = function(){
+        //把当前小图的src给到大图的src
+        imgs[0].src = this.src
+      }
+    }
+
+  </script>
+
+</body>
+</html>

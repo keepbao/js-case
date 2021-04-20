@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      width: 800px;
+      margin: auto;
+      /* position: absolute; */
+    }
+    li {
+      position: relative;
+      float: left;
+      height: 60px;
+      width: 100px;
+      line-height: 90px;
+      background-color: #333;
+      list-style-type:none;
+      margin: 10px;
+    }
+    .click{
+      font-size: 10px;
+      text-align: center;
+      line-height: 40px;
+      font-family: '仿宋';
+      font-weight: bold;
+      background-color: aqua;
+      border: 1px solid red;
+    }
+  </style>
+  <title>电影院选座</title>
+</head>
+<body>
+  <ul>
+    <li class="click">座位已选</li><li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li>
+    <p style="clear:both;"></p>
+    <div>屏幕中央</div>
+  </ul>
+
+  <script>
+    // 逻辑：没有click类的时候，进行添加，同时对文本进行赋值；反之，清空click类，同时 文本值为空
+    let lis = document.getElementsByTagName('li');
+    for(let i=0;i<lis.length;i++){
+      lis[i].onclick = function(){
+        let res = this.getAttribute('class');
+        if(!res){
+          this.setAttribute('class','click');
+          this.innerText = '座位已选';
+        }else{
+          this.setAttribute('class','');
+          this.innerText = '';
+        }
+      }
+    }
+  </script>
+</body>
+</html>

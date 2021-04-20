@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- 引入jQuery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js">
+  </script>
+  <style>
+    button {
+      padding: 5px;
+      border: 0;
+    }
+  </style>
+  <title>微博热点</title>
+</head>
+
+<body>
+  <div>
+    <h2>百度热榜</h2>
+    <button id="but">换一换</button>
+    <ul>
+      <!-- <li><a href="">曹卫东神级开团一换一</a><span>4370000</span></li> -->
+      <!-- <li><a href="">曹卫东神级开团一换二</a><span>4070000</span></li>
+      <li><a href="">曹卫东神级开团一换三</a><span>3530000</span></li>
+      <li><a href="">曹卫东神级开团一换四</a><span>3190000</span></li>
+      <li><a href="">曹卫东神级开团一换五</a><span>2860000</span></li> -->
+    </ul>
+  </div>
+  <script>
+    // 逻辑：获取数据，按照规定好的要求，进行展示
+    // ajax获取数据，js动态拼接，最后append到ul
+    // 本案例使用的是 jQuery
+
+    $(function () {
+      $.ajax({
+        type: "get",
+        url: "./top.json",
+        data: {},
+        dataType: "json",
+        success: function (res) {
+          console.log(res);
+          // 1.获取数据
+          let datas = res.data;
+          let str = '';
+          datas.forEach((item) => {
+            // 2.进行动态拼接
+            str += '<li><a href="">' + item.title + '</a><span>' + item.num + '</span></li>';
+          })
+          // 3.要把之前的全部删除
+          $("ul li").remove();
+          // 4.把新的元素添加
+          $("ul").append(str);
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
